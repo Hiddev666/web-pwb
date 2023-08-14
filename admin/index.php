@@ -23,7 +23,7 @@ include("../config.php");
     <!-- Content -->
     <div class="container p-4">
         <h1>Admin Page</h1>
-        <button class="btn btn-primary">Create a New Page</button>
+        <a href="input_page.php"><button class="btn btn-primary">Create a New Page</button></a>
 
         <form action="" method="GET" class="row g-3 mt-4">
             <div class="col-4">
@@ -50,6 +50,7 @@ include("../config.php");
                 $no = 1;
 
                 while ($row = mysqli_fetch_array($sql)) {?>
+                <tr>
                     <td>
                         <?php echo $no; ?>
                     </td>
@@ -65,6 +66,7 @@ include("../config.php");
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </td>
+                    </tr>
                     <?php $no++;} ?>
             </tbody>
         </table>

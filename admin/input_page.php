@@ -1,83 +1,98 @@
 <?php
-    include("config.php");
+include("../config.php");
 ?>
 
+<!-- Header -->
+<?php include("../resource/components/header.php") ?>
+<div class="container p-4">
 
-<!doctype html>
-<html lang="en">
+<?php 
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>
+$judul = "";
+$kutipan = "";
+$isi = "";
+$error = "";
+$success = "";
 
-<body>
+if(isset($_POST['submit'])) {
+    $judul = $_POST['judul'];
+    $kutipan = $_POST['kutipan'];
+    $isi = $_POST['isi'];
 
-    <!-- Header -->
-    <?php include("../resource/components/header.php")?>
-    
+    if($judul == "" or $kutipan == "" or $isi == "") {
+        $error = "Data belum dimasukkan dengan benar!";
+    } else {
+        $query = "INSERT INTO halaman(judul, kutipan, isi) values ('$judul', '$kutipan', '$isi')";
+        $goquery = mysqli_query($db, $query);
 
-    <!-- Content -->
-    <div class="container p-4">
-        <h1>Admin Page</h1>
-        <button class="btn btn-primary">Create a New Page</button>
+        if($goquery) {
+            $success = "Data berhasil dimasukkan!";
+        } else {
+            $success = "Data gagal dimasukkan!";
+        }
+    }
+ 
+}
 
-        <form action="" method="GET" class="row g-3 mt-4">
-            <div class="col-4">
-                <input type="text" class="form-control" name="search" placeholder="Search a Keyword">
-            </div>
-            <div class="col-2">
-                <input type="submit" class="btn btn-success" name="submit" value="Search">
-            </div>
-        </form>
+?>
 
-        <table class="table mt-4">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Judul</th>
-                    <th scope="col">Kutipan</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    $query = "SELECT * FROM halaman";
-                    $sql = mysqli_query($db, $query);
-                    $no = 1;
+<?php
 
-                    while($row = mysqli_fetch_array($sql)) {
-                ?>
+if($error) {?>
 
-                <td><?php echo $no;?></td>
-                <td><?php echo $row['judul'];?></td>
-                <td><?php echo $row['judul'];?></td>
-                <td>
-                    <div class="g-4">
-                        <button class="btn btn-warning">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
-                    </div>
-                </td>
+<div class="alert alert-danger" role="alert">
+  <?php echo $error;?>
+</div>
 
+<?php } elseif($success) {?>
+    <div class="alert alert-success" role="alert">
+  <?php echo $success;?>
+</div>
+<?php }?>
 
-                <?php $no++; }?>
-            </tbody>
-        </table>
+<!-- Content -->
+    <h1>Admin Page | Input Data</h1>
+    <div class="mb-3 row">
+        <a href="index.php" class="link-underline link-underline-opacity-0">
+            < Back to Admin Page</a>
 
+                <form action="" method="POST">
+                    <form>
+
+                        <div class="mb-3 row">
+                            <label for="judul" class="col-sm-2 col-form-label">Judul</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="judul" name="judul" value="<?php echo $judul;?>">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label for="kutipan" class="col-sm-2 col-form-label">Kutipan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="kutipan" name="kutipan" value="<?php echo $kutipan;?>">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="isi" class="col-sm-2 col-form-label">Isi</label>
+                            <div class="col-sm-10">
+                                <textarea type="text" class="form-control" id="summernote" name="isi"></textarea></textarea></textarea>
+                                    <?php echo $isi;?>
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Simpan Data">
+                        </div>
+                        </div>
+
+                    </form>
+                </form>
     </div>
+</div>
 
-    <!-- Footer -->
-    <?php include("../resource/components/footer.php")?>
-
-    
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+<!-- Footer -->
+<?php include("../resource/components/footer.php") ?>
