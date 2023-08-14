@@ -16,35 +16,9 @@
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Admin Page</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Admin Tutors</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Admin Partner</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Admin Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- Header -->
+    <?php include("../resource/components/header.php")?>
+    
 
     <!-- Content -->
     <div class="container p-4">
@@ -60,7 +34,7 @@
             </div>
         </form>
 
-        <table class="table">
+        <table class="table mt-4">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -96,6 +70,7 @@
     </div>
 
     <!-- Footer -->
+    <?php include("../resource/components/footer.php")?>
 
     
 
