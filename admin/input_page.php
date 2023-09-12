@@ -3,7 +3,7 @@ include("../config.php");
 ?>
 
 <!-- Header -->
-<?php include("../resource/components/header.php") ?>
+<?php include("../resource/components/admin/header.php") ?>
 <div class="container p-4">
 
     <?php
@@ -133,4 +133,4 @@ include("../config.php");
 </div>
 
 <!-- Footer -->
-<?php include("../resource/components/footer.php") ?>
+<?php include("../resource/components/admin/footer.php") ?>

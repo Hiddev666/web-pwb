@@ -17,7 +17,7 @@ include("../config.php");
 <body>
 
     <!-- Navbar -->
-    <?php include("../resource/components/header.php") ?>
+    <?php include("../resource/components/admin/header.php") ?>
 
 
     <!-- Content -->
@@ -91,11 +91,9 @@ include("../config.php");
                     $sql = mysqli_query($db, $query);
                     $no = 1;
                 }
-
-
-
-
-                while ($row = mysqli_fetch_array($sql)) { ?>
+                
+                while ($row = mysqli_fetch_array($sql)) {?>
+                    
                     <tr>
                         <td>
                             <?php echo $no; ?>
@@ -144,7 +142,7 @@ include("../config.php");
     </div>
 
     <!-- Footer -->
-    <?php include("../resource/components/footer.php") ?>
+    <?php include("../resource/components/admin/footer.php") ?>
 
 
 
