@@ -29,12 +29,11 @@
     <div class="wrapper">
         <!-- untuk home -->
         <section id="home">
-            <?php getImage('29')?>
-            <img src="https://img.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg?size=626&ext=jpg&ga=GA1.2.1769275626.1605867161"/>
+            <img src="<?php getImage('29')?>"/>
             <div class="kolom">
-                <p class="deskripsi">Belajar Programming #dirumahaja</p>
-                <h2>Tetap Sehat, Tetap Semangat</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, nobis.</p>
+                <p class="deskripsi"><?php getKutipan('29')?></p>
+                <h2><?php getJudul('29')?></h2>
+                <p><?php getIsi('29')?></p>
                 <p><a href="" class="tbl-pink">Pelajari Lebih Lanjut</a></p>
             </div>
         </section>
@@ -42,13 +41,12 @@
         <!-- untuk courses -->
         <section id="courses">
             <div class="kolom">
-                <p class="deskripsi">You Will Need This</p>
-                <h2>Online Courses</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed deserunt voluptatibus possimus blanditiis reiciendis. Qui, facilis! Delectus exercitationem dolores sapiente?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed deserunt voluptatibus possimus blanditiis reiciendis. Qui, facilis! Delectus exercitationem dolores sapiente?</p>
+                <p class="deskripsi"><?php getKutipan('32')?></p>
+                <h2><?php getJudul('32')?></h2>
+                <p><?php getIsi('32')?></p>
                 <p><a href="" class="tbl-biru">Pelajari Lebih Lanjut</a></p>
             </div>
-            <img src="https://img.freepik.com/free-vector/online-learning-isometric-concept_1284-17947.jpg?size=626&ext=jpg&ga=GA1.2.1769275626.1605867161"/>
+            <img src="<?php getImage('32')?>"/>
         </section>
 
         <!-- untuk tutors -->
