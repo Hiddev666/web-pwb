@@ -43,12 +43,49 @@ function getJudul($id_tulisan) {
 function getIsi($id_tulisan) {
     include("config.php");
     
+
+    $sql = "SELECT * FROM halaman where id='$id_tulisan'";
+    $query = mysqli_query($db, $sql);
+    if($query) {
+        $arr = mysqli_fetch_assoc($query);
+        $text = strip_tags($arr['isi']);
+    }
+
+    return $text;
+}
+
+function clearUrl($judul) {
+    $lower = strtolower($judul);
+    $stripped = str_replace(' ', '-', $lower);
+    return $stripped;
+}
+
+function createUrl($id_tulisan) {
+    include("config.php");
+    
     $sql = "SELECT * FROM halaman where id='$id_tulisan'";
     $query = mysqli_query($db, $sql);
     $arr = mysqli_fetch_assoc($query);
-    $text = strip_tags($arr['isi']);
+    $judul = clearUrl($arr['judul']);
 
-    echo $text;
+    echo getRealUri() . "/pages.php/$id_tulisan/$judul";
+}
+
+function getId() {
+    $id = "";
+    if(isset($_SERVER['PATH_INFO'])) {
+        $id = dirname($_SERVER['PATH_INFO']);
+        $id = preg_replace("/[^0-9]/", "", $id);
+    }
+    return $id;
+}
+
+function maxText(string $isi, int $max) {
+    $arr = explode(" ", $isi);
+    $arr = array_slice($arr, 0, $max);
+    $asd = implode(" ", $arr);
+
+    return $asd;
 }
 
 ?>

@@ -26,15 +26,16 @@
             </div>
         </div>
     </nav>
+
     <div class="wrapper">
         <!-- untuk home -->
         <section id="home">
-            <img src="<?php getImage('29')?>"/>
+            <img src="<?php getImage('29') ?>"/>
             <div class="kolom">
                 <p class="deskripsi"><?php getKutipan('29')?></p>
                 <h2><?php getJudul('29')?></h2>
-                <p><?php getIsi('29')?></p>
-                <p><a href="" class="tbl-pink">Pelajari Lebih Lanjut</a></p>
+                <p><?php echo maxText(getIsi('29'), 30)?></p>
+                <p><a href="<?php createUrl('29')?>" class="tbl-pink">Pelajari Lebih Lanjut</a></p>
             </div>
         </section>
 
@@ -43,7 +44,7 @@
             <div class="kolom">
                 <p class="deskripsi"><?php getKutipan('32')?></p>
                 <h2><?php getJudul('32')?></h2>
-                <p><?php getIsi('32')?></p>
+                <p><?php echo maxText(getIsi('32'), 30)?></p>
                 <p><a href="" class="tbl-biru">Pelajari Lebih Lanjut</a></p>
             </div>
             <img src="<?php getImage('32')?>"/>
