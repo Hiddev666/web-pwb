@@ -35,10 +35,10 @@
                     <a class="nav-link active" aria-current="page" href="#">Admin Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Admin Tutors</a>
+                    <a class="nav-link" href="input_tutors.php">Admin Tutors</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Admin Partner</a>
+                    <a class="nav-link" href="">Admin Partner</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Admin Contact</a>

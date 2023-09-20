@@ -45,7 +45,7 @@
                 <p class="deskripsi"><?php getKutipan('32')?></p>
                 <h2><?php getJudul('32')?></h2>
                 <p><?php echo maxText(getIsi('32'), 30)?></p>
-                <p><a href="" class="tbl-biru">Pelajari Lebih Lanjut</a></p>
+                <p><a href="<?php createUrl('32')?>" class="tbl-biru">Pelajari Lebih Lanjut</a></p>
             </div>
             <img src="<?php getImage('32')?>"/>
         </section>

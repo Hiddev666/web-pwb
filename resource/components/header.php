@@ -9,7 +9,7 @@
 <body>
     <nav>
         <div class="wrapper">
-            <div class="logo"><a href=''>RumahRafif.</a></div>
+            <div class="logo"><a href='<?php getRealUri()?>'>RumahRafif.</a></div>
             <div class="menu">
                 <ul>
                     <li><a href="#home">Home</a></li>
