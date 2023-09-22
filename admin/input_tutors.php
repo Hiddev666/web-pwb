@@ -1,5 +1,6 @@
 <?php
 include("../config.php");
+include("../func/getImage.php");
 ?>
 
 <!-- Header -->
@@ -18,17 +19,39 @@ include("../config.php");
 
     if (isset($_POST['submit'])) {
         $nama = $_POST['nama'];
-        $foto = $_POST['foto'];
         $isi = $_POST['isi'];
         $id = $_GET['id'];
 
+    
 
-        if ($nama == "" or $foto == "" or $isi == "") {
+        if ($nama == "") {
             $error = "Data belum dimasukkan dengan benar!";
         } else {
 
+
+            if($_FILES['foto']['name']) {
+                $foto_name = $_FILES['foto']['name'];
+                $foto_file = $_FILES['foto']['tmp_name'];
+    
+                $detail_file = pathinfo($foto_name);
+                $foto_ekstensi = $detail_file['extension'];
+    
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                if(!in_array($foto_ekstensi, $allowedExtensions)) {
+                    $error = "Ekstensi yang diperbolehkan adalh jpg, jpeg, png dan gif";
+                }
+            }
+
+            if(empty($error)) {
+                if($foto_name) {
+                    $direktori = "../resource/uploaded";
+                    $foto_name = "tutors_" . time() . "_" . $foto_name;
+                    move_uploaded_file($foto_file, $direktori . "/" . $foto_name);
+                }
+            }
+
             if (isset($_GET['operation'])) {
-                $query = "UPDATE tutors SET nama='$nama', foto='$foto', isi='$isi' where id='$id'";
+                $query = "UPDATE tutors SET nama='$nama', foto='$foto_name', isi='$isi' where id='$id'";
                 $goquery = mysqli_query($db, $query);
 
                 if ($goquery) {
@@ -37,7 +60,7 @@ include("../config.php");
                     $success = "Data gagal diubah!";
                 }
             } else {
-                $query = "INSERT INTO tutors(nama, foto, isi) values ('$nama', '$foto', '$isi')";
+                $query = "INSERT INTO tutors(nama, foto, isi) values ('$nama', '$foto_name', '$isi')";
                 $goquery = mysqli_query($db, $query);
     
                 if ($goquery) {
@@ -47,18 +70,11 @@ include("../config.php");
                 }
             }
 
-            if($_FILES['foto']['name']) {
-                $foto_name = $_FILES['foto']['name'];
-                $foto_file = $_FILES['foto']['tmp_name'];
-
-                $detail_file = pathinfo($foto_name);
-                $foto_ekstensi = 
-            }
-
-        }
+            
 
         
 
+        }
 
     }
 
@@ -87,7 +103,7 @@ include("../config.php");
         <a href="index.php" class="link-underline link-underline-opacity-0">
             < Back to Admin Page</a>
 
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <form>
                         <?php if (isset($_GET['operation'])) {
                             $id = $_GET['id'];
@@ -113,8 +129,8 @@ include("../config.php");
                         <div class="mb-3 row">
                             <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" id="foto" name="foto"
-                                    value="<?php echo $foto; ?>" enctype="multipart/form-data">
+                                <img src="../resource/uploaded/<?php echo getTutorsImage($id)?>" alt="" style="max-width: 110px; max-height: 110px;">
+                                <input type="file" class="form-control" id="foto" name="foto">
                             </div>
                         </div>
 

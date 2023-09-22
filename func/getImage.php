@@ -19,6 +19,17 @@ function getImage($id_tulisan) {
     echo getRealUri() . $gambar;
 }
 
+function getTutorsPicture($id) {
+    include("config.php");
+
+    $sql = "SELECT * FROM tutors where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['foto'];
+
+    echo "resource/uploaded/" . $foto;
+}
+
 function getKutipan($id_tulisan) {
     include("config.php");
     
@@ -71,6 +82,17 @@ function createUrl($id_tulisan) {
     echo getRealUri() . "/pages.php/$id_tulisan/$judul";
 }
 
+function createTutorsUrl($id) {
+    include("config.php");
+    
+    $sql = "SELECT * FROM tutors where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $nama = clearUrl($arr['nama']);
+
+    echo getRealUri() . "/pages.php/$id/$nama";
+}
+
 function getId() {
     $id = "";
     if(isset($_SERVER['PATH_INFO'])) {
@@ -87,5 +109,21 @@ function maxText(string $isi, int $max) {
 
     return $asd;
 }
+
+function getTutorsImage($id) {
+    include("../config.php");
+    
+    $sql = "SELECT * FROM tutors where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['foto'];
+
+    if($foto){
+        return $foto;
+    } else {
+        return "../img/blank-profile-picture-973460_960_720.webp";
+    }
+}
+
 
 ?>
