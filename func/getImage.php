@@ -21,13 +21,17 @@ function getImage($id_tulisan) {
 
 function getTutorsPicture($id) {
     include("config.php");
-
+    
     $sql = "SELECT * FROM tutors where id='$id'";
     $query = mysqli_query($db, $sql);
     $arr = mysqli_fetch_assoc($query);
     $foto = $arr['foto'];
 
-    echo "resource/uploaded/" . $foto;
+    if($foto){
+        return $foto;
+    } else {
+        return "../img/blank-profile-picture-973460_960_720.webp";
+    }
 }
 
 function getKutipan($id_tulisan) {
@@ -90,7 +94,17 @@ function createTutorsUrl($id) {
     $arr = mysqli_fetch_assoc($query);
     $nama = clearUrl($arr['nama']);
 
-    echo getRealUri() . "/pages.php/$id/$nama";
+    echo getRealUri() . "/tutors_pages.php/$id/$nama";
+}
+function createPasUrl($id) {
+    include("config.php");
+    
+    $sql = "SELECT * FROM tutors where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $nama = clearUrl($arr['nama']);
+
+    echo getRealUri() . "/tutors_pages.php/$id/$nama";
 }
 
 function getId() {
@@ -125,5 +139,40 @@ function getTutorsImage($id) {
     }
 }
 
+function getTutorsName($id) {
+    include("config.php");
+    
+    $sql = "SELECT * FROM tutors where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['nama'];
+
+    return $foto;
+}
+function getTutorsIsi($id) {
+    include("config.php");
+    
+    $sql = "SELECT * FROM tutors where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['isi'];
+
+    return $foto;
+}
+
+function getPartnersImage($id) {
+    include("../config.php");
+    
+    $sql = "SELECT * FROM partners where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['foto'];
+
+    if($foto){
+        return $foto;
+    } else {
+        return "../img/blank-profile-picture-973460_960_720.webp";
+    }
+}
 
 ?>

@@ -9,14 +9,7 @@ $page = $_GET['page'];
 
     <div style="padding: 3%; padding-left: 10%;">
         <div>
-                <img src="<?php 
-                
-                if(isset($page == 'tutors')) {
-                    getTutorsPicture($id);
-                } else {
-                    getImage($id);
-                } ?>
-                " alt="img">
+                <img src="<?php getImage($id);?>" alt="img">
                 
         </div>
         <p class="deskripsi"><?php getKutipan($id) ?></p>

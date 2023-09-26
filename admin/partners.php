@@ -24,7 +24,7 @@ include("../func/getImage.php");
     <!-- Content -->
     <div class="container p-4">
         <h1>Admin Page</h1>
-        <a href="input_tutors.php"><button class="btn btn-primary">Create a New Page</button></a>
+        <a href="input_partners.php"><button class="btn btn-primary">Create a New Page</button></a>
 
         <form action="" method="POST" class="row g-3 mt-4">
             <div class="col-4">
@@ -39,7 +39,7 @@ include("../func/getImage.php");
                     $operation = $_GET['operation'];
                     $id = $_GET['id'];
 
-                    $query = "DELETE FROM tutors where id='$id'";
+                    $query = "DELETE FROM partners where id='$id'";
                     $sql = mysqli_query($db, $query);
                 }
 
@@ -71,24 +71,24 @@ include("../func/getImage.php");
                 $katakunci = "";
 
                 $batas = 5;
-				$tutors = isset($_GET['tutors'])?(int)$_GET['tutors'] : 1;
-				$tutors_awal = ($tutors>1) ? ($tutors * $batas) - $batas : 0;	
+				$partners = isset($_GET['partners'])?(int)$_GET['partners'] : 1;
+				$partners_awal = ($partners>1) ? ($partners * $batas) - $batas : 0;	
  
-				$previous = $tutors - 1;
-				$next = $tutors + 1;
+				$previous = $partners - 1;
+				$next = $partners + 1;
 				
-				$data = mysqli_query($db,"select * from tutors");
+				$data = mysqli_query($db,"select * from partners");
 				$jumlah_data = mysqli_num_rows($data);
-				$total_tutors = ceil($jumlah_data / $batas);
+				$total_partners = ceil($jumlah_data / $batas);
  
-				$sql = mysqli_query($db,"select * from tutors limit $tutors_awal, $batas");
-				$nomor = $tutors_awal+1;
+				$sql = mysqli_query($db,"select * from partners limit $partners_awal, $batas");
+				$nomor = $partners_awal+1;
                 $no = 1;
 
 
                 if (isset($_POST['submit'])) {
                     $katakunci = $_POST['katakunci'];
-                    $query = "SELECT * FROM tutors  where foto like '%$katakunci%'";
+                    $query = "SELECT * FROM partners  where foto like '%$katakunci%'";
                     $sql = mysqli_query($db, $query);
                     $no = 1;
                 }
@@ -100,17 +100,17 @@ include("../func/getImage.php");
                             <?php echo $no; ?>
                         </td>
                         <td>
-                            <img src="../resource/uploaded/<?php echo getTutorsImage($row['id'])?>" alt="" style="max-width: 100px; max-height: 100px; border-radius: 5px;">
+                            <img src="../resource/uploaded/<?php echo getPartnersImage($row['id'])?>" alt="" style="max-width: 100px; max-height: 100px; border-radius: 5px;">
                         </td>
                         <td>
                             <?php echo $row['nama']; ?>
                         </td>
                         <td>
                             <div class="g-4">
-                                <a href="input_tutors.php?operation=update&id=<?php echo $row['id'] ?>">
+                                <a href="input_partners.php?operation=update&id=<?php echo $row['id'] ?>">
                                     <button class="btn btn-warning">Edit</button>
                                 </a>
-                                <a href="tutors.php?operation=delete&id=<?php echo $row['id'] ?>"
+                                <a href="partners.php?operation=delete&id=<?php echo $row['id'] ?>"
                                     onclick="return confirm('Yakin mau hapus data ini?')">
                                     <button class="btn btn-danger">Delete</button>
                                 </a>
@@ -125,17 +125,17 @@ include("../func/getImage.php");
         <nav>
 			<ul class="pagination justify-content-center mt-5">
 				<li class="page-item">
-					<a class="page-link" <?php if($tutors > 1){ echo "href='?tutors=$previous'"; } ?>>Previous</a>
+					<a class="page-link" <?php if($partners > 1){ echo "href='?partners=$previous'"; } ?>>Previous</a>
 				</li>
 				<?php 
-				for($x=1;$x<=$total_tutors;$x++){
+				for($x=1;$x<=$total_partners;$x++){
 					?> 
-					<li class="page-item"><a class="page-link" href="?tutors=<?php echo $x ?>"><?php echo $x; ?></a></li>
+					<li class="page-item"><a class="page-link" href="?partners=<?php echo $x ?>"><?php echo $x; ?></a></li>
 					<?php
 				}
 				?>				
 				<li class="page-item">
-					<a  class="page-link" <?php if($tutors < $total_tutors) { echo "href='?tutors=$next'"; } ?>>Next</a>
+					<a  class="page-link" <?php if($partners < $total_partners) { echo "href='?partners=$next'"; } ?>>Next</a>
 				</li>
 			</ul>
 		</nav>

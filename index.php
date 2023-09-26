@@ -92,21 +92,22 @@
                 </div>
 
                 <div class="partner-list">
+                <?php 
+                    
+                    $query = "SELECT * FROM partners order by id desc";
+                    $sql = mysqli_query($db, $query);
+
+                    while($row = mysqli_fetch_array($sql)) {
+                    ?>
+
                     <div class="kartu-partner">
-                        <img src="https://www.designevo.com/res/templates/thumb_small/black-wheat-and-mortarboard.png"/>
+                        <a href="<?php createTutorsUrl($row['id'])?>?page=tutors">
+                            <img src="resource/uploaded/<?php echo $row['foto']?>"/>
+                            <p><?php echo $row['nama']?></p>
+                        </a>
                     </div>
-                    <div class="kartu-partner">
-                        <img src="https://image.freepik.com/free-vector/campus-collage-university-education-logo-design-template_7492-63.jpg"/>
-                    </div>
-                    <div class="kartu-partner">
-                        <img src="https://image.freepik.com/free-vector/campus-collage-university-education-logo-design-template_7492-62.jpg"/>
-                    </div>
-                    <div class="kartu-partner">
-                        <img src="https://www.designevo.com/res/templates/thumb_small/encircled-branches-and-book.png"/>
-                    </div>
-                    <div class="kartu-partner">
-                        <img src="https://image.freepik.com/free-vector/campus-collage-university-education-logo-design-template_7492-64.jpg"/>
-                    </div>
+
+                    <?php }?>
                 </div>
             </div>
         </section>
