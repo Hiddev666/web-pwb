@@ -34,7 +34,7 @@
     font-family: sans-serif;
     margin-bottom: 30px;
     font-size: 43px;
-    color: #385a64;
+    color: #1C2F36;
     font-weight: bold;
 }
 
@@ -70,6 +70,18 @@ input {
     height: 48px;
     border-radius: 8px;
     background-color: #018673;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.btn-login {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #D268CC;
     border: none;
     color: white;
     font-size: 18px;

@@ -1,4 +1,16 @@
-<?php include("config.php"); ?>
+<?php include("config.php"); 
+
+session_start();
+
+if(isset($_SESSION['user_username'])) {
+    
+    if($_SESSION['user_username'] != "") {
+        header("location:index.php");
+        exit();
+    }
+}
+
+?>
 <?php include("func/getImage.php"); ?>
 
 
