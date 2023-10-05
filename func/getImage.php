@@ -33,6 +33,20 @@ function getTutorsPicture($id) {
         return "../img/blank-profile-picture-973460_960_720.webp";
     }
 }
+function getPartnersPicture($id) {
+    include("config.php");
+    
+    $sql = "SELECT * FROM partners where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['foto'];
+
+    if($foto){
+        return $foto;
+    } else {
+        return "../img/blank-profile-picture-973460_960_720.webp";
+    }
+}
 
 function getKutipan($id_tulisan) {
     include("config.php");
@@ -96,15 +110,15 @@ function createTutorsUrl($id) {
 
     echo getRealUri() . "/tutors_pages.php/$id/$nama";
 }
-function createPasUrl($id) {
+function createPartnersUrl($id) {
     include("config.php");
     
-    $sql = "SELECT * FROM tutors where id='$id'";
+    $sql = "SELECT * FROM partners where id='$id'";
     $query = mysqli_query($db, $sql);
     $arr = mysqli_fetch_assoc($query);
     $nama = clearUrl($arr['nama']);
 
-    echo getRealUri() . "/tutors_pages.php/$id/$nama";
+    echo getRealUri() . "/partners_pages.php/$id/$nama";
 }
 
 function getId() {
@@ -149,10 +163,31 @@ function getTutorsName($id) {
 
     return $foto;
 }
+function getPartnersName($id) {
+    include("config.php");
+    
+    $sql = "SELECT * FROM partners where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['nama'];
+
+    return $foto;
+}
+
 function getTutorsIsi($id) {
     include("config.php");
     
     $sql = "SELECT * FROM tutors where id='$id'";
+    $query = mysqli_query($db, $sql);
+    $arr = mysqli_fetch_assoc($query);
+    $foto = $arr['isi'];
+
+    return $foto;
+}
+function getPartnersIsi($id) {
+    include("config.php");
+    
+    $sql = "SELECT * FROM partners where id='$id'";
     $query = mysqli_query($db, $sql);
     $arr = mysqli_fetch_assoc($query);
     $foto = $arr['isi'];
@@ -173,6 +208,52 @@ function getPartnersImage($id) {
     } else {
         return "../img/blank-profile-picture-973460_960_720.webp";
     }
+}
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+function send_email($email_penerima, $nama_penerima, $judul_email, $isi_email) {
+
+$env = parse_ini_file(".env");
+
+    
+$email_pengirim = "officehiddev@gmail.com";
+$nama_pengirim = "noreply";
+
+//Load Composer's autoloader
+require getcwd(). '/vendor/autoload.php';
+
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->SMTPDebug = 0;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'officehiddev@gmail.com';                     //SMTP username
+    $mail->Password   = 'vpho mwxa whvr mzmd';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom($email_pengirim, $nama_pengirim);
+    $mail->addAddress($email_penerima, $email_penerima);     //Add a recipient
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = $judul_email;
+    $mail->Body    = $isi_email;
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    $mail->send();
+    echo 'Success';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 }
 
 ?>
