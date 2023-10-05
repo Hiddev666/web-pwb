@@ -1,6 +1,5 @@
 <?php
 include("../config.php");
-include("../func/getImage.php");
 ?>
 
 
@@ -10,7 +9,7 @@ include("../func/getImage.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tutors | Admin</title>
+    <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
@@ -23,8 +22,8 @@ include("../func/getImage.php");
 
     <!-- Content -->
     <div class="container p-4">
-        <h1>Admin Tutors</h1>
-        <a href="input_tutors.php"><button class="btn btn-primary">Create a New Page</button></a>
+        <h1>Admin Page</h1>
+        <a href="input_page.php"><button class="btn btn-primary">Create a New Page</button></a>
 
         <form action="" method="POST" class="row g-3 mt-4">
             <div class="col-4">
@@ -39,7 +38,7 @@ include("../func/getImage.php");
                     $operation = $_GET['operation'];
                     $id = $_GET['id'];
 
-                    $query = "DELETE FROM tutors where id='$id'";
+                    $query = "DELETE FROM halaman where id='$id'";
                     $sql = mysqli_query($db, $query);
                 }
 
@@ -58,8 +57,8 @@ include("../func/getImage.php");
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">foto</th>
-                    <th scope="col">nama</th>
+                    <th scope="col">Judul</th>
+                    <th scope="col">Kutipan</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -71,24 +70,24 @@ include("../func/getImage.php");
                 $katakunci = "";
 
                 $batas = 5;
-				$tutors = isset($_GET['tutors'])?(int)$_GET['tutors'] : 1;
-				$tutors_awal = ($tutors>1) ? ($tutors * $batas) - $batas : 0;	
+				$halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+				$halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
  
-				$previous = $tutors - 1;
-				$next = $tutors + 1;
+				$previous = $halaman - 1;
+				$next = $halaman + 1;
 				
-				$data = mysqli_query($db,"select * from tutors");
+				$data = mysqli_query($db,"select * from halaman");
 				$jumlah_data = mysqli_num_rows($data);
-				$total_tutors = ceil($jumlah_data / $batas);
+				$total_halaman = ceil($jumlah_data / $batas);
  
-				$sql = mysqli_query($db,"select * from tutors limit $tutors_awal, $batas");
-				$nomor = $tutors_awal+1;
+				$sql = mysqli_query($db,"select * from halaman limit $halaman_awal, $batas");
+				$nomor = $halaman_awal+1;
                 $no = 1;
 
 
                 if (isset($_POST['submit'])) {
                     $katakunci = $_POST['katakunci'];
-                    $query = "SELECT * FROM tutors  where foto like '%$katakunci%'";
+                    $query = "SELECT * FROM halaman  where judul like '%$katakunci%'";
                     $sql = mysqli_query($db, $query);
                     $no = 1;
                 }
@@ -100,17 +99,17 @@ include("../func/getImage.php");
                             <?php echo $no; ?>
                         </td>
                         <td>
-                            <img src="../resource/uploaded/<?php echo getTutorsImage($row['id'])?>" alt="" style="max-width: 100px; max-height: 100px; border-radius: 5px;">
+                            <?php echo $row['judul']; ?>
                         </td>
                         <td>
-                            <?php echo $row['nama']; ?>
+                            <?php echo $row['kutipan']; ?>
                         </td>
                         <td>
                             <div class="g-4">
-                                <a href="input_tutors.php?operation=update&id=<?php echo $row['id'] ?>">
+                                <a href="input_page.php?operation=update&id=<?php echo $row['id'] ?>">
                                     <button class="btn btn-warning">Edit</button>
                                 </a>
-                                <a href="tutors.php?operation=delete&id=<?php echo $row['id'] ?>"
+                                <a href="index.php?operation=delete&id=<?php echo $row['id'] ?>"
                                     onclick="return confirm('Yakin mau hapus data ini?')">
                                     <button class="btn btn-danger">Delete</button>
                                 </a>
@@ -125,17 +124,17 @@ include("../func/getImage.php");
         <nav>
 			<ul class="pagination justify-content-center mt-5">
 				<li class="page-item">
-					<a class="page-link" <?php if($tutors > 1){ echo "href='?tutors=$previous'"; } ?>>Previous</a>
+					<a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
 				</li>
 				<?php 
-				for($x=1;$x<=$total_tutors;$x++){
+				for($x=1;$x<=$total_halaman;$x++){
 					?> 
-					<li class="page-item"><a class="page-link" href="?tutors=<?php echo $x ?>"><?php echo $x; ?></a></li>
+					<li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
 					<?php
 				}
 				?>				
 				<li class="page-item">
-					<a  class="page-link" <?php if($tutors < $total_tutors) { echo "href='?tutors=$next'"; } ?>>Next</a>
+					<a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
 				</li>
 			</ul>
 		</nav>

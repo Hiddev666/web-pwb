@@ -87,3 +87,14 @@ input {
     font-size: 18px;
     font-weight: bold;
 }
+
+.btn-login-admin {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #29424A;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
