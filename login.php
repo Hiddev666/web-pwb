@@ -60,6 +60,7 @@ if (isset($_POST['submit'])) {
 
         if (empty($err)) {
             $_SESSION['user_username'] = $r1['username'];
+            $_SESSION['user_email'] = $r1['email'];
             header("location:rahasia.php");
             exit();
         }
@@ -67,13 +68,6 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
-
-<?php if ($err) {
-    echo "<div class='error'>$err</div>";
-} ?>
-<?php if ($sukses) {
-    echo "<div class='sukses'>$sukses</div>";
-} ?>
 
 <div class="container">
     <div class="left">
@@ -83,6 +77,12 @@ if (isset($_POST['submit'])) {
         <div class="form-wrapper">
             <form action="" method="POST">
                 <h1>Login.</h1>
+                <?php if ($err) {
+                    echo "<div class='error'><p>$err</p></div>";
+                } ?>
+                <?php if ($sukses) {
+                    echo "<div class='sukses'>$sukses</div>";
+                } ?>
                 <label for="email">
                     <input type="email" placeholder="Email" name="email">
                 </label><br>

@@ -1,7 +1,7 @@
-<?php include("../config.php"); 
+<?php include("../config.php");
 session_start();
 
-if($_SESSION['admin_username'] != "") {
+if ($_SESSION['admin_username'] != "") {
     header("location:index.php");
     exit();
 }
@@ -66,12 +66,7 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<?php if ($err) {
-    echo "<div class='error'>$err</div>";
-} ?>
-<?php if ($sukses) {
-    echo "<div class='sukses'>$sukses</div>";
-} ?>
+
 
 <div class="container">
     <div class="left">
@@ -81,6 +76,12 @@ if (isset($_POST['submit'])) {
         <div class="form-wrapper">
             <form action="" method="POST">
                 <h1>Login Admin.</h1>
+                <?php if ($err) {
+                    echo "<div class='error'><p>$err</p></div>";
+                } ?>
+                <?php if ($sukses) {
+                    echo "<div class='sukses'>$sukses</div>";
+                } ?>
                 <label for="username">
                     <input type="username" placeholder="Username" name="username">
                 </label><br>
@@ -89,7 +90,6 @@ if (isset($_POST['submit'])) {
                 </label><br>
                 <div class="btn-register-wrapper">
                     <button type="submit" class="btn-login-admin" name="submit">Login</button>
-                    <p>Don't have a Account? <a href="">Register</a></p>
                 </div>
             </form>
         </div>

@@ -23,7 +23,7 @@
                     <li><a href="#tutors">Tutors</a></li>
                     <li><a href="#partners">Partners</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="" class="tbl-biru">Sign Up</a></li>
+                    <li><a href="register.php" class="tbl-biru">Sign Up</a></li>
                 </ul>
             </div>
         </div>

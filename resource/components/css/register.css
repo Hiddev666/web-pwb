@@ -59,6 +59,36 @@ input {
     border-radius: 8px;
 }
 
+.error {
+    text-align: left;
+    padding-left: 15px;
+    width: 75%;
+    height: 40px;
+    margin-bottom: 30px;
+    border: 2px solid red;
+    border-radius: 8px;
+}
+
+.error p {
+    text-align: left;
+    color: red;
+}
+
+.sukses {
+    text-align: left;
+    padding-left: 15px;
+    width: 75%;
+    height: 40px;
+    margin-bottom: 30px;
+    border: 2px solid green;
+    border-radius: 8px;
+}
+
+.sukses p {
+    text-align: left;
+    color: green;
+}
+
 .btn-register-wrapper {
     margin-top: 15px;
     margin-left: 13px;
@@ -93,6 +123,29 @@ input {
     height: 48px;
     border-radius: 8px;
     background-color: #29424A;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.btn-login-admin2 {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #29424A;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.btn-save-profile {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #FD735D;
     border: none;
     color: white;
     font-size: 18px;
