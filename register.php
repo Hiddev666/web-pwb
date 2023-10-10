@@ -1,10 +1,10 @@
-<?php include("config.php"); 
+<?php include("config.php");
 
 session_start();
 
-if(isset($_SESSION['user_username'])) {
-    
-    if($_SESSION['user_username'] != "") {
+if (isset($_SESSION['user_username'])) {
+
+    if ($_SESSION['user_username'] != "") {
         header("location:index.php");
         exit();
     }
@@ -27,24 +27,24 @@ if(isset($_SESSION['user_username'])) {
 </head>
 
 <nav>
-        <div class="wrapper">
-            <div class="logo"><a href=''>Hiddev.</a></div>
-            <div class="menu">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#tutors">Tutors</a></li>
-                    <li><a href="#partners">Partners</a></li>
+    <div class="wrapper">
+        <div class="logo"><a href=''>Hiddev.</a></div>
+        <div class="menu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#tutors">Tutors</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <?php if (isset($_SESSION['user_username'])) {
+                    echo $_SESSION['user_username'] . " | " . "<a href='logout.php'>Logout</a>";
+                } else { ?>
                     <li><a href="#contact">Contact</a></li>
-                    <?php if (isset($_SESSION['user_username'])) {
-                        echo $_SESSION['user_username'] . " | " . "<a href='logout.php'>Logout</a>";
-                    } else { ?>
-                        <li><a href="#contact">Contact</a></li>
-                    <?php } ?>
-                </ul>
-            </div>
+                <?php } ?>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <?php
 $username = "";
@@ -54,39 +54,39 @@ $sukses = "";
 $password = "";
 $confirm = "";
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
-        $email = $_POST['email'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $confirm = $_POST['confirm'];
-    
-    
-    if($email == "" or $username == "" or $password == "" or $confirm == "") {
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirm = $_POST['confirm'];
+
+
+    if ($email == "" or $username == "" or $password == "" or $confirm == "") {
         $err = "<p>Silahkan masukkan semua isian</p>";
     }
-    
-    if($email != "") {
+
+    if ($email != "") {
         $query = "SELECT email from users where email='$email'";
         $sql = mysqli_query($db, $query);
         $count = mysqli_num_rows($sql);
-        if($count > 0) {
+        if ($count > 0) {
             $err = "<p>Email yang kamu masukkan sudah terdaftar</p>";
         }
-    
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $err = "<p>Email yang kamu masukkan tidak valid</p>";
         }
     }
-    
-    if($password != $confirm) {
+
+    if ($password != $confirm) {
         $err = "<p>Password dan konfirmais tidak sesuai</p>";
     }
-    
-    if(empty($err)) {
+
+    if (empty($err)) {
         $status = md5(rand(0, 1000));
 
-        $judul = "Halaman   Konfirmasi Pendaftaran"; 
+        $judul = "Halaman   Konfirmasi Pendaftaran";
         $isi = "Akun yang kamu miliki dengan email <b>$email</b> telah siap digunakan <br/>>";
         $isi .= "Sebelumnya silahkan melakukan aktivasi email di link di bawha ini: <br/>";
         $isi .= getRealUri() . "/verifikasi.php?email=$email&kode=$status";
@@ -96,7 +96,7 @@ if(isset($_POST['submit'])) {
         $sql1 = "INSERT INTO users (username, email, password, status) values ('$username', '$email', '$hash', '$status')";
         $q1 = mysqli_query($db, $sql1);
 
-        if($q1) {
+        if ($q1) {
             $sukses = "Proses Berhasil, silahkan cek email kamu untuk verifikasi";
         }
 
@@ -107,43 +107,45 @@ if(isset($_POST['submit'])) {
 
 ?>
 
-<?php if($err) {echo "<div class='error'>$err</div>";}?>
-<?php if($sukses) {echo "<div class='sukses'>$sukses</div>";}?>
-
-    <div class="container">
-        <div class="left">
-            <img src="resource/img/7118756_3426526.jpg" alt="flat">
-        </div>
-        <div class="right">
-            <div class="form-wrapper">
-                <form action="" method="POST">
-                        <h1>Register.</h1>
-                    <label for="username">
-                        <input type="text" placeholder="Username" name="username">
-                    </label><br>
-                    <label for="email">
-                        <input type="email" placeholder="Email" name="email">
-                    </label><br>
-                    <label for="password">
-                        <input type="password" placeholder="Password" name="password">
-                    </label><br>
-                    <label for="confirm">
-                        <input type="password" placeholder="Confirm Password" name="confirm">
-                    </label><br>
-                    <div class="btn-register-wrapper">
-                        <button type="submit" class="btn-register" name="submit">Register</button>
-                        <p>Have a Account? <a href="">Login</a></p>
-                    </div>
-                </form>
-            </div>
+<div class="container">
+    <div class="left">
+        <img src="resource/img/7118756_3426526.jpg" alt="flat">
+    </div>
+    <div class="right">
+        <div class="form-wrapper">
+            <form action="" method="POST">
+                <h1>Register.</h1>
+                <?php if ($err) {
+                    echo "<div class='error'><p>$err</p></div>";
+                } ?>
+                <?php if ($sukses) {
+                    echo "<div class='sukses'>$sukses</div>";
+                } ?>
+                <label for="username">
+                    <input type="text" placeholder="Username" name="username">
+                </label><br>
+                <label for="email">
+                    <input type="email" placeholder="Email" name="email">
+                </label><br>
+                <label for="password">
+                    <input type="password" placeholder="Password" name="password">
+                </label><br>
+                <label for="confirm">
+                    <input type="password" placeholder="Confirm Password" name="confirm">
+                </label><br>
+                <div class="btn-register-wrapper">
+                    <button type="submit" class="btn-register" name="submit">Register</button>
+                    <p>Have a Account? <a href="login.php">Login</a></p>
+                </div>
+            </form>
         </div>
     </div>
-
-    <div id="copyright">
-        <div class="wrapper">
-            &copy; 2023. <b>Hiddev.</b> All Rights Reserved.
-        </div>
+</div>
+<div id="copyright">
+    <div class="wrapper">
+        &copy; 2023. <b>Hiddev.</b> All Rights Reserved.
     </div>
+</div>
 
 
 </body>

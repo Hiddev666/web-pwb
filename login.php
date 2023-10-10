@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
         if (empty($err)) {
             $_SESSION['user_username'] = $r1['username'];
             $_SESSION['user_email'] = $r1['email'];
-            header("location:rahasia.php");
+            header("location:index.php");
             exit();
         }
     }
@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
                 </label><br>
                 <div class="btn-register-wrapper">
                     <button type="submit" class="btn-login" name="submit">Login</button>
-                    <p>Don't have a Account? <a href="">Register</a></p>
+                    <p>Don't have a Account? <a href="register.php">Register</a></p>
                 </div>
             </form>
         </div>

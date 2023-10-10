@@ -2,7 +2,9 @@
 include("config.php");
 include("func/getImage.php");
 $id = getId();
-$page = $_GET['page'];
+if(isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
 ?>
 
 <?php include("resource/components/header.php");?>

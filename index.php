@@ -1,4 +1,7 @@
-<?php include("config.php"); ?>
+<?php include("config.php"); 
+
+session_start()
+?>
 <?php include("func/getImage.php"); ?>
 
 
@@ -23,7 +26,11 @@
                     <li><a href="#tutors">Tutors</a></li>
                     <li><a href="#partners">Partners</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="register.php" class="tbl-biru">Sign Up</a></li>
+                    <?php if (isset($_SESSION['user_username'])) {
+                        echo $_SESSION['user_username'] . " | " . "<a href='logout.php'>Logout</a>";
+                    } else { ?>
+                        <li><a href="register.php" class="tbl-biru">Sign Up</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
