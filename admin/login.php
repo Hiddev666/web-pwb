@@ -1,9 +1,13 @@
 <?php include("../config.php");
 session_start();
 
-if ($_SESSION['admin_username'] != "") {
-    header("location:index.php");
-    exit();
+if(isset($_SESSION['admin_username'])) {
+    if ($_SESSION['admin_username'] != "") {
+        header("location:index.php");
+        exit();
+    }
+} else {
+    
 }
 
 ?>
